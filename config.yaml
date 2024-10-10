@@ -1,0 +1,70 @@
+platforms:
+  android:
+    versionName: 1.0.0
+    manifest:
+      -
+        file: AndroidManifest.xml
+        target: manifest/application/activity
+        attrs:
+          'android:screenOrientation': portrait
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: "<uses-permission android:name=\"android.permission.READ_MEDIA_IMAGES\"/>\n"
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>\n"
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\n"
+    versionCode: 2
+    gradle:
+      -
+        file: variables.gradle
+        target:
+          ext: null
+        insert:
+          -
+            targetSdkVersion: 32
+        insertType: variable
+    xml:
+      -
+        resFile: values/styles.xml
+        target: 'resources/style[@name="AppTheme.NoActionBarLaunch"]'
+        inject: '<item name="windowSplashScreenBackground">#321EA1</item>'
+  ios:
+    targets:
+      App:
+        version: 1.0.0
+        xcconfig:
+          -
+            file: App/Config.xcconfig
+            set:
+              TARGETED_DEVICE_FAMILY: '1,2'
+        plist:
+          -
+            replace: true
+            entries:
+              -
+                UISupportedInterfaceOrientations:
+                  - UIInterfaceOrientationPortrait
+                  - UIInterfaceOrientationLandscapeLeft
+                  - UIInterfaceOrientationLandscapeRight
+              -
+                NSCameraUsageDescription: 'Take photos'
+              -
+                NSPhotoLibraryAddUsageDescription: 'Add photos'
+              -
+                NSPhotoLibraryUsageDescription: 'Access photos'
+              -
+                CFBundleLocalizations:
+                  - en
+              -
+                UISupportedInterfaceOrientations~ipad:
+                  - UIInterfaceOrientationPortrait
+                  - UIInterfaceOrientationPortraitUpsideDown
+                  - UIInterfaceOrientationLandscapeLeft
+                  - UIInterfaceOrientationLandscapeRight
+        buildNumber: 1.1.2

@@ -1,0 +1,7 @@
+{
+    "framework_version": "4.0",
+    "xcode_version": "15.0.1",
+    "dSYM": false,
+    "app_logo_background_color": "#BBB3E4",
+    "AndroidRemoveDuplicatedPermissions": false
+}
